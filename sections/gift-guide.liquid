@@ -1,28 +1,40 @@
+{{ 'section-gift-guide.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
-  div.gift-guide {
+  .gift-guide {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gift-guide__background-top,
+  .gift-guide__background-bottom {
+    background-image: url('{{ "gift-guide-illustration.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 {%- endstyle -%}
 
 <div class="gift-guide color-{{ section.settings.color_scheme }}">
   <div class="gift-guide__background-top"></div>
-  <div class="gift-guide__background-bottom"></div>
 
-  <div class="gift-guide__container section">
+  <div class="gift-guide__container">
     <div class="gift-guide__content">
       <div class="gift-guide__text-wrapper">
         {% if section.settings.heading != blank %}
           <h2 class="gift-guide__heading">{{ section.settings.heading }}</h2>
         {% endif %}
 
-        {% if section.settings.subheading != blank %}
-          <p class="gift-guide__subheading">{{ section.settings.subheading }}</p>
-        {% endif %}
+        <div class="gift-guide__subheading-description-wrapper">
+          {% if section.settings.subheading != blank %}
+            <p class="gift-guide__subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
 
-        {% if section.settings.description != blank %}
-          <div class="gift-guide__description">{{ section.settings.description }}</div>
-        {% endif %}
+          {% if section.settings.description != blank %}
+            <div class="gift-guide__description">{{ section.settings.description }}</div>
+          {% endif %}
+        </div>
 
         {% if section.settings.button_label != blank %}
           <div class="gift-guide__button-wrapper">
@@ -36,14 +48,27 @@
         {% endif %}
       </div>
 
-      <div class="gift-guide__illustration">
-        {% if section.settings.bottom_text_mobile != blank %}
-          <p class="gift-guide__bottom-text-mobile">{{ section.settings.bottom_text_mobile }}</p>
-        {% endif %}
-        {% if section.settings.bottom_text_desktop != blank %}
-          <p class="gift-guide__bottom-text-desktop">{{ section.settings.bottom_text_desktop }}</p>
+      <div class="gift-guide__background-bottom">
+        {% if section.settings.button_label != blank %}
+          <div class="gift-guide__button-wrapper-bottom">
+            <a href="{{ section.settings.button_link }}" class="gift-guide__button button button--primary">
+              <span class="gift-guide__button-text">{{ section.settings.button_label }}</span>
+              <span class="gift-guide__button-icon">
+                {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
+              </span>
+            </a>
+          </div>
         {% endif %}
       </div>
+    </div>
+
+    <div class="gift-guide__buttom-content">
+      {% if section.settings.bottom_text_mobile != blank %}
+        <p class="gift-guide__bottom-text-mobile">{{ section.settings.bottom_text_mobile }}</p>
+      {% endif %}
+      {% if section.settings.bottom_text_desktop != blank %}
+        <p class="gift-guide__bottom-text-desktop">{{ section.settings.bottom_text_desktop }}</p>
+      {% endif %}
     </div>
   </div>
 </div>

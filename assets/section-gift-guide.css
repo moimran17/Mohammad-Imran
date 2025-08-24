@@ -1,0 +1,204 @@
+.gift-guide__background-top,
+.gift-guide__description,
+.gift-guide__bottom-text-desktop,
+.gift-guide__button-wrapper {
+  display: none;
+}
+
+.gift-guide__content {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.gift-guide__text-wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 1.5rem 0;
+  padding: 0 2rem 2rem;
+}
+
+.gift-guide__heading,
+.gift-guide__subheading {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.gift-guide__heading {
+  font-size: 2rem;
+}
+
+.gift-guide__subheading {
+  font-size: 1rem;
+}
+
+.gift-guide__background-bottom {
+  min-width: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-position: center center;
+  height: 15rem;
+}
+
+.gift-guide__button-wrapper-bottom {
+  margin-bottom: 2rem;
+}
+
+.gift-guide__buttom-content {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  background-color: #f5f5f5;
+  color: black;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+}
+
+.gift-guide__bottom-text-mobile,
+.gift-guide__bottom-text-desktop {
+  margin: 0;
+}
+
+.gift-guide__button {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .gift-guide__bottom-text-mobile {
+    display: none;
+  }
+
+  .gift-guide__background-top,
+  .gift-guide__bottom-text-desktop {
+    display: block;
+  }
+
+  .gift-guide__background-top {
+    min-width: 100%;
+    width: 100%;
+    background-position: bottom center;
+    height: 20rem;
+  }
+
+  .gift-guide__content {
+    flex-flow: row nowrap;
+  }
+
+  .gift-guide__text-wrapper {
+    width: 30%;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 2rem 2rem;
+  }
+
+  .gift-guide__heading,
+  .gift-guide__subheading {
+    text-align: left;
+  }
+
+  .gift-guide__heading {
+    font-size: 2rem;
+  }
+
+  .gift-guide__subheading {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .gift-guide__description {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .gift-guide__button {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .gift-guide__button-wrapper {
+    display: block;
+  }
+
+  .gift-guide__background-bottom {
+    width: 70%;
+    background-position: top left;
+  }
+
+  .gift-guide__button-wrapper-bottom {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .gift-guide__text-wrapper {
+    padding: 0 3rem 2rem;
+  }
+
+  .gift-guide__heading {
+    font-size: 3rem;
+  }
+
+  .gift-guide__subheading {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .gift-guide__description {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .gift-guide__button {
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+  }
+
+  .gift-guide__background-bottom {
+    height: 20rem;
+  }
+
+  .gift-guide__buttom-content {
+    padding: 0.1rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 2160px) {
+  .gift-guide__background-top {
+    height: 50rem;
+  }
+
+  .gift-guide__text-wrapper {
+    padding: 2rem 5rem 5rem;
+    gap: 3rem 0;
+  }
+
+  .gift-guide__heading {
+    font-size: 5rem;
+  }
+
+  .gift-guide__subheading,
+  .gift-guide__description {
+    font-size: 2rem;
+  }
+
+  .gift-guide__button {
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+  }
+
+  .gift-guide__background-bottom {
+    height: 30rem;
+  }
+}
