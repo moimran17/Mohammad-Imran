@@ -1,11 +1,15 @@
 {%- style -%}
+  div.gift-guide {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
 {%- endstyle -%}
 
-<div class="gift-guide">
+<div class="gift-guide color-{{ section.settings.color_scheme }}">
   <div class="gift-guide__background-top"></div>
   <div class="gift-guide__background-bottom"></div>
 
-  <div class="gift-guide__container page-width">
+  <div class="gift-guide__container section">
     <div class="gift-guide__content">
       <div class="gift-guide__text-wrapper">
         {% if section.settings.heading != blank %}
@@ -23,9 +27,9 @@
         {% if section.settings.button_label != blank %}
           <div class="gift-guide__button-wrapper">
             <a href="{{ section.settings.button_link }}" class="gift-guide__button button button--primary">
-              <span>{{ section.settings.button_label }}</span>
-              <span>
-                {{- '' | inline_asset_content -}}
+              <span class="gift-guide__button-text">{{ section.settings.button_label }}</span>
+              <span class="gift-guide__button-icon">
+                {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
               </span>
             </a>
           </div>
@@ -34,7 +38,10 @@
 
       <div class="gift-guide__illustration">
         {% if section.settings.bottom_text_mobile != blank %}
-          <p class="gift-guide__bottom-text">{{ section.settings.bottom_text_mobile }}</p>
+          <p class="gift-guide__bottom-text-mobile">{{ section.settings.bottom_text_mobile }}</p>
+        {% endif %}
+        {% if section.settings.bottom_text_desktop != blank %}
+          <p class="gift-guide__bottom-text-desktop">{{ section.settings.bottom_text_desktop }}</p>
         {% endif %}
       </div>
     </div>
@@ -47,8 +54,7 @@
 {% schema %}
 {
   "name": "Gift Guide",
-  "tag": "section",
-  "class": "section",
+  "tag": "div",
   "settings": [
     {
       "type": "header",
@@ -94,6 +100,36 @@
       "id": "bottom_text_desktop",
       "label": "Bottom text (Desktop)",
       "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top bottom",
+      "default": 36
     }
   ],
   "presets": [
