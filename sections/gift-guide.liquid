@@ -1,0 +1,105 @@
+{%- style -%}
+{%- endstyle -%}
+
+<div class="gift-guide">
+  <div class="gift-guide__background-top"></div>
+  <div class="gift-guide__background-bottom"></div>
+
+  <div class="gift-guide__container page-width">
+    <div class="gift-guide__content">
+      <div class="gift-guide__text-wrapper">
+        {% if section.settings.heading != blank %}
+          <h2 class="gift-guide__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <p class="gift-guide__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="gift-guide__description">{{ section.settings.description }}</div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <div class="gift-guide__button-wrapper">
+            <a href="{{ section.settings.button_link }}" class="gift-guide__button button button--primary">
+              <span>{{ section.settings.button_label }}</span>
+              <span>
+                {{- '' | inline_asset_content -}}
+              </span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="gift-guide__illustration">
+        {% if section.settings.bottom_text_mobile != blank %}
+          <p class="gift-guide__bottom-text">{{ section.settings.bottom_text_mobile }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- javascript -%}
+{%- endjavascript -%}
+
+{% schema %}
+{
+  "name": "Gift Guide",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "The Gift Guide",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text_mobile",
+      "label": "Bottom text (Mobile)",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text_desktop",
+      "label": "Bottom text (Desktop)",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide"
+    }
+  ]
+}
+{% endschema %}
