@@ -127,7 +127,7 @@
 
   .custom-header__desktop-right {
     flex: 1;
-    text-align: right;
+    text-align: center;
   }
 }
 

@@ -122,8 +122,43 @@
   }
 
   .gift-guide__button {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.8rem;
     font-size: 0.7rem;
+    background: black;
+    color: white;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+  }
+
+  .gift-guide__button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: -100%;
+    background: #fff544;
+    z-index: 1;
+    transition: left 0.3s ease;
+  }
+
+  .gift-guide__button:hover::before {
+    left: 0;
+  }
+
+  .gift-guide__button:hover {
+    color: black;
+  }
+
+  .gift-guide__button-text,
+  .gift-guide__button-icon {
+    z-index: 2;
+  }
+
+  .gift-guide__button:hover .gift-guide__button-icon svg path {
+    fill: black;
   }
 
   .gift-guide__button-wrapper {
@@ -160,7 +195,7 @@
   }
 
   .gift-guide__button {
-    padding: 0.5rem 2rem;
+    padding: 0.8rem 3rem;
     font-size: 1rem;
   }
 
@@ -194,7 +229,7 @@
   }
 
   .gift-guide__button {
-    padding: 1rem 3rem;
+    padding: 2rem 4rem;
     font-size: 1.5rem;
   }
 
