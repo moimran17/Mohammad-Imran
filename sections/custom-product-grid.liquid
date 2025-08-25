@@ -74,6 +74,11 @@
               <label class="cpg-modal__label">Size</label>
               <div class="cpg-modal__select-wrap">
                 <select class="cpg-modal__select" data-cpg-size></select>
+                <div class="cpg-modal__select-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m6 8 4 4 4-4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -204,7 +209,11 @@
             const dot = document.createElement('span');
             dot.className = 'cpg-swatch__dot';
             dot.style.background = value.toLowerCase();
-            btn.append(dot, document.createTextNode(value));
+
+            const textSpan = document.createElement('span');
+            textSpan.textContent = value;
+
+            btn.append(dot, textSpan);
 
             btn.addEventListener('click', () => {
               selected.Color = value;

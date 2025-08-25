@@ -135,11 +135,32 @@
   color: #fff;
 }
 
+.cpg-modal__select-wrap {
+  position: relative;
+}
+
 .cpg-modal__select {
   width: 100%;
-  padding: 0.625rem 0.75rem;
+  padding: 0.625rem 0.75rem 0.625rem 1rem;
   border: 1px solid #111;
   background: #fff;
+  appearance: none;
+  padding-right: 3.5rem;
+  border-radius: 0;
+}
+
+.cpg-modal__select-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3rem;
+  height: 100%;
+  border: 1px solid #111;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .cpg-modal__select:focus-visible {
