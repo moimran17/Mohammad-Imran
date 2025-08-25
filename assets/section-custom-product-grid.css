@@ -1,0 +1,27 @@
+.cpg__title {
+  font-size: 1.7rem;
+  font-weight: normal;
+  text-align: center;
+}
+.cpg__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+}
+
+.cpg__card-link {
+  display: block;
+}
+
+.cpg__image-wrappper {
+  width: 100%;
+  background: white;
+  overflow: hidden;
+}
+
+.cpg__image {
+  width: 100%;
+  min-height: 15rem;
+  object-fit: cover;
+  display: block;
+}

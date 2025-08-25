@@ -18,16 +18,18 @@
       {%- if product -%}
         {%- assign img = product.featured_image -%}
         <div class="cpg__card" {{ block.shopify_attributes }}>
-          <div class="cpg__image-wrappper">
-            <img
-              class="cpg__image"
-              style="aspect-ratio: {{ img.aspect_ratio }};"
-              src="{{ img | image_url: width: img.width, height: img.height }}"
-              alt="{{ img.alt }}"
-              width="{{ img.width }}"
-              height="{{ img.height }}"
-            >
-          </div>
+          <a href="#" class="cpg__card-link">
+            <div class="cpg__image-wrappper">
+              <img
+                class="cpg__image"
+                style="aspect-ratio: {{ img.aspect_ratio }};"
+                src="{{ img | image_url: width: img.width, height: img.height }}"
+                alt="{{ img.alt }}"
+                width="{{ img.width }}"
+                height="{{ img.height }}"
+              >
+            </div>
+          </a>
         </div>
       {%- endif -%}
     {%- endfor -%}
