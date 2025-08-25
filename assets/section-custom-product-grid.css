@@ -192,6 +192,7 @@
   padding: 0.625rem 0.75rem 0.625rem 1rem;
   border: 1px solid #111;
   background: #fff;
+  color: black;
   padding-right: 3.5rem;
   border-radius: 0;
   cursor: pointer;
@@ -200,6 +201,7 @@
   display: flex;
   align-items: center;
   min-height: 2.5rem;
+  font-size: 1rem;
 }
 
 .cpg-modal__select-icon {
