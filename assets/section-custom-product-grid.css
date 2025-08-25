@@ -92,6 +92,7 @@
 }
 .cpg-modal__media img {
   width: 100%;
+  min-height: 15rem;
   height: auto;
   display: block;
   object-fit: cover;
@@ -253,6 +254,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .cpg-modal__body {
+    padding: 2rem;
+  }
+
   .cpg-modal__dialog {
     margin: 3rem auto;
     max-width: 480px;
@@ -275,6 +280,11 @@
 @media screen and (min-width: 2160px) {
   .cpg__grid {
     padding: 0 0 2rem;
+  }
+  
+  .cpg-modal__dialog {
+    margin: 5rem auto;
+    max-width: 768px;
   }
 
   .cpg__title {
