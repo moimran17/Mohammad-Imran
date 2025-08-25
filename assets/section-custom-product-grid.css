@@ -142,7 +142,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0.75rem 1rem 0.75rem 1.5rem;
   border: none;
   border-right: 1px solid #111;
@@ -150,6 +150,7 @@
   background: #fff;
   flex: 1;
   min-width: 0;
+  font-size: 1rem;
 }
 .cpg-swatch:last-child {
   border-right: none;
