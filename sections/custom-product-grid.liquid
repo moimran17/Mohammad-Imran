@@ -3,7 +3,9 @@
 
 {%- style -%}
   #cpg-{{ section.id }} {
+    max-width: var(--page-width);
     padding-top: {{ section.settings.padding_top_mobile }}px;
+    margin: 0 auto;
   }
 {%- endstyle -%}
 
@@ -33,6 +35,55 @@
         </div>
       {%- endif -%}
     {%- endfor -%}
+  </div>
+
+  <div class="cpg-modal">
+    <div
+      class="cpg-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cpg-modal-title-{{ section.id }}"
+    >
+      <button class="cpg-modal__close">&times;</button>
+      <div class="cpg-modal__body">
+        <div class="cpg-modal__media-content-container">
+          <div class="cpg-modal__media"></div>
+          <div class="cpg-modal__content">
+            <h3 class="cpg-modal__title">Black Leather Bag</h3>
+            <div class="cpg-modal__price">30.00$</div>
+            <div class="cpg-modal__desc">
+              Thick black winter jacket, with soft fleece lining. Perfect for those cold weather days.
+            </div>
+          </div>
+        </div>
+
+        <div class="cpg-modal__options-action-container">
+          <div class="cpg-modal__option">
+            <label for="" class="cpg-modal__label">Color</label>
+            <div class="cpg-modal__swatches"></div>
+          </div>
+          <div class="cpg-modal__option">
+            <label for="" class="cpg-modal__label">Size</label>
+            <div class="cpg-modal__select-wrap">
+              <select class="cpg-modal__select">
+                <option value="">Choose your size</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cpg-modal__action">
+            <button class="cpg-modal__atc">
+              <span class="gift-guide__atc-text">ADD TO CART</span>
+              <span class="gift-guide__atc-icon">
+                {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cpg-modal__backdrop"></div>
   </div>
 </section>
 

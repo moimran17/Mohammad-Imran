@@ -25,3 +25,182 @@
   object-fit: cover;
   display: block;
 }
+
+.cpg-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.cpg-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.cpg-modal__dialog {
+  max-width: 768px;
+  position: relative;
+  background: white;
+  margin: 1rem;
+  padding: 1rem;
+  z-index: 1;
+  max-height: calc(100% - 2rem);
+  overflow: auto;
+  border-radius: 0.1rem;
+}
+
+.cpg-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 1.5rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.cpg-modal__body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.cpg-modal__media-content-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.cpg-modal__media {
+  width: 40%;
+  flex: 0 0 auto;
+}
+
+.cpg-modal__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cpg-modal__content {
+  width: 60%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.cpg-modal__title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.cpg-modal__price {
+  font-weight: 600;
+}
+
+.cpg-modal__desc {
+  font-size: 0.8rem;
+}
+
+.cpg-modal__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gpa: 0.5rem;
+}
+
+.cpg-modal__label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.cpg-modal__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cpg-swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  border: 1px solid #111;
+  cursor: pointer;
+  background: white;
+}
+
+.cpg-swatch__dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.cpg-swatch--selected {
+  background: #111;
+  color: white;
+}
+
+.cpg-modal__select {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #111;
+  background: white;
+}
+
+.cpg-modal__select:focus-visible {
+  outline: none;
+}
+
+.cpg-modal__options-action-container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.cpg-modal__action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.cpg-modal__atc {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  background: black;
+  color: white;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.cpg-modal__atc[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 1024px) {
+  .cpg__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .cpg-modal__dialog {
+    margin: 5rem auto;
+  }
+
+  .cpg__image {
+    min-height: 20rem;
+  }
+}
