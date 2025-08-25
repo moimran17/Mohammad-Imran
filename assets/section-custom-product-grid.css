@@ -64,7 +64,7 @@
 .cpg-modal__body {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 2rem 1rem;
 }
 
@@ -84,6 +84,9 @@
 .cpg-modal__row--size,
 .cpg-modal__row--add-to-cart {
   flex-direction: column;
+}
+.cpg-modal__row--add-to-cart {
+  margin-top: 2rem;
 }
 
 .cpg-modal__media {
