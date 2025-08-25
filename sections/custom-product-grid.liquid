@@ -1,0 +1,102 @@
+{{ 'section-custom-product-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-custom-product-grid.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  #cpg-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+  }
+{%- endstyle -%}
+
+<section class="cpg" id="cpg-{{ section.id }}">
+  {%- if section.settings.title != blank -%}
+    <h2 class="cpg__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <div class="cpg__grid">
+    {%- for block in section.blocks -%}
+      {%- assign product = block.settings.product -%}
+      {%- if product -%}
+        {%- assign img = product.featured_image -%}
+        <div class="cpg__card" {{ block.shopify_attributes }}>
+          <div class="cpg__image-wrappper">
+            <img
+              class="cpg__image"
+              style="aspect-ratio: {{ img.aspect_ratio }};"
+              src="{{ img | image_url: width: img.width, height: img.height }}"
+              alt="{{ img.alt }}"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% javascript %}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "product",
+      "id": "upsell_product",
+      "label": "Upsell Product",
+      "info": "When any product with variant options Black and Medium is added to the cart the selected upsell product will also be automatically added to the cart."
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Product Grid"
+    }
+  ]
+}
+{% endschema %}
