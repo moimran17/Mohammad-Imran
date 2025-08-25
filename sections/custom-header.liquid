@@ -22,21 +22,23 @@
       </div>
 
       <div class="custom-header__mobile-menu">
-        {% if section.settings.mobile_text != blank %}
-          <p class="custom-header__mobile-text">{{ section.settings.mobile_text }}</p>
-        {% endif %}
+        <div class="custom-header__mobile-content">
+          {% if section.settings.mobile_text != blank %}
+            <p class="custom-header__mobile-text">{{ section.settings.mobile_text }}</p>
+          {% endif %}
 
-        {% if section.settings.button_label != blank %}
-          <a
-            href="{{ section.settings.button_link | default: '#' }}"
-            class="custom-header__button custom-header__button--mobile"
-          >
-            <span class="custom-header__button-text">{{ section.settings.button_label }}</span>
-            <span class="custom-header__button-icon">
-              {{- 'icon-arrow-right-black.svg' | inline_asset_content -}}
-            </span>
-          </a>
-        {% endif %}
+          {% if section.settings.button_label != blank %}
+            <a
+              href="{{ section.settings.button_link | default: '#' }}"
+              class="custom-header__button custom-header__button--mobile"
+            >
+              <span class="custom-header__button-text">{{ section.settings.button_label }}</span>
+              <span class="custom-header__button-icon">
+                {{- 'icon-arrow-right-black.svg' | inline_asset_content -}}
+              </span>
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
 
@@ -69,6 +71,9 @@
 </div>
 
 {% javascript %}
+  document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed.');
+  });
 {% endjavascript %}
 
 {% schema %}
