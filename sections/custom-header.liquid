@@ -4,7 +4,68 @@
 {%- endstyle -%}
 
 <div class="custom-header color-{{ section.settings.color_scheme }}">
-  <h2>{{ section.settings.logo_text }}</h2>
+  <div class="custom-header__container">
+    <div class="custom-header__mobile">
+      <div class="custom-header__mobile-top">
+        <button class="custom-header__hamburger">
+          <span class="custom-header__hamburger-icon custom-header__hamburger-icon--open">
+            {{- 'hamburger-open.svg' | inline_asset_content }}
+          </span>
+          <span class="custom-header__hamburger-icon custom-header__hamburger-icon--close">
+            {{- 'hamburger-close.svg' | inline_asset_content }}
+          </span>
+        </button>
+
+        <div class="custom-header__logo">
+          <h1 class="custom-header__logo-text">{{ section.settings.logo_text | default: 'LOGO TEXT' }}</h1>
+        </div>
+      </div>
+
+      <div class="custom-header__mobile-menu">
+        {% if section.settings.mobile_text != blank %}
+          <p class="custom-header__mobile-text">{{ section.settings.mobile_text }}</p>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="custom-header__button custom-header__button--mobile"
+          >
+            <span class="custom-header__button-text">{{ section.settings.button_label }}</span>
+            <span class="custom-header__button-icon">
+              {{- 'icon-arrow-right-black.svg' | inline_asset_content -}}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="custom-header__desktop">
+      <div class="custom-header__desktop-left">
+        <div class="custom-header__logo">
+          <h1 class="custom-header__logo-text">{{ section.settings.logo_text | default: 'LOGO TEXT' }}</h1>
+        </div>
+      </div>
+      <div class="custom-header__desktop-center">
+        {% if section.settings.desktop_text != blank %}
+          <p class="custom-header__desktop-text">{{ section.settings.desktop_text }}</p>
+        {% endif %}
+      </div>
+      <div class="custom-header__desktop-right">
+        {% if section.settings.button_label != blank %}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="custom-header__button custom-header__button--desktop"
+          >
+            <span class="custom-header__button-text">{{ section.settings.button_label }}</span>
+            <span class="custom-header__button-icon">
+              {{- 'icon-arrow-right-black.svg' | inline_asset_content -}}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% javascript %}
