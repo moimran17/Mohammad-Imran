@@ -181,6 +181,24 @@
   appearance: none;
   padding-right: 3.5rem;
   border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.cpg-modal__select-header {
+  width: 100%;
+  padding: 0.625rem 0.75rem 0.625rem 1rem;
+  border: 1px solid #111;
+  background: #fff;
+  padding-right: 3.5rem;
+  border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
 }
 
 .cpg-modal__select-icon {
@@ -195,6 +213,57 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 3;
+  transition: transform 0.2s ease;
+}
+
+.cpg-modal__select-icon svg {
+  transition: transform 0.2s ease;
+}
+
+.cpg-modal__select-wrap.is-open .cpg-modal__select-icon svg {
+  transform: rotate(180deg);
+}
+
+.cpg-modal__select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #111;
+  border-top: none;
+  z-index: 1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  opacity: 0;
+}
+
+.cpg-modal__select-wrap.is-open .cpg-modal__select-options {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.cpg-modal__select-option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: #fff;
+  color: #111;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.cpg-modal__select-option:hover {
+  background: #f5f5f5;
+}
+
+.cpg-modal__select-option.is-selected {
+  background: #111;
+  color: #fff;
 }
 
 .cpg-modal__select:focus-visible {

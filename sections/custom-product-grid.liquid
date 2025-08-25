@@ -74,13 +74,24 @@
 
         <div class="cpg-modal__row cpg-modal__row--size" data-cpg-size-wrap hidden>
           <label class="cpg-modal__label">Size</label>
-          <div class="cpg-modal__select-wrap">
-            <select class="cpg-modal__select" data-cpg-size></select>
+          <div class="cpg-modal__select-wrap" data-cpg-select-wrap>
+            <select class="cpg-modal__select" data-cpg-size hidden></select>
+            <div
+              class="cpg-modal__select-header"
+              data-cpg-select-header
+              role="button"
+              tabindex="0"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span class="cpg-modal__select-placeholder">Choose your size</span>
+            </div>
             <div class="cpg-modal__select-icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="m6 8 4 4 4-4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
+            <div class="cpg-modal__select-options" data-cpg-select-options role="listbox"></div>
           </div>
         </div>
 
@@ -147,6 +158,17 @@
         descNode.textContent = '';
         colorNode.innerHTML = '';
         sizeNode.innerHTML = '';
+
+        // Reset custom dropdown
+        const selectWrap = modal.querySelector('[data-cpg-select-wrap]');
+        const selectOptions = modal.querySelector('[data-cpg-select-options]');
+        const placeholder = modal.querySelector('.cpg-modal__select-placeholder');
+        const selectHeader = modal.querySelector('[data-cpg-select-header]');
+        if (selectWrap) selectWrap.classList.remove('is-open');
+        if (selectOptions) selectOptions.innerHTML = '';
+        if (placeholder) placeholder.textContent = 'Choose your size';
+        if (selectHeader) selectHeader.setAttribute('aria-expanded', 'false');
+
         colorWrap.hidden = true;
         sizeWrap.hidden = true;
         selected = { Color: null, Size: null };
@@ -227,19 +249,109 @@
 
         if (sizeOption) {
           sizeWrap.hidden = false;
-          const placeholder = document.createElement('option');
-          placeholder.value = '';
-          placeholder.textContent = 'Choose your size';
-          sizeNode.append(placeholder);
+          const selectWrap = modal.querySelector('[data-cpg-select-wrap]');
+          const selectHeader = modal.querySelector('[data-cpg-select-header]');
+          const selectOptions = modal.querySelector('[data-cpg-select-options]');
+          const placeholder = modal.querySelector('.cpg-modal__select-placeholder');
+
+          // Create hidden select for form submission
+          const placeholderOpt = document.createElement('option');
+          placeholderOpt.value = '';
+          placeholderOpt.textContent = 'Choose your size';
+          sizeNode.append(placeholderOpt);
+
+          // Create custom dropdown options
           sizeOption.values.forEach((value) => {
+            // Add to hidden select
             const opt = document.createElement('option');
             opt.value = value;
             opt.textContent = value;
             sizeNode.append(opt);
+
+            // Add to custom dropdown
+            const customOpt = document.createElement('button');
+            customOpt.type = 'button';
+            customOpt.className = 'cpg-modal__select-option';
+            customOpt.textContent = value;
+            customOpt.setAttribute('data-value', value);
+            customOpt.setAttribute('role', 'option');
+            customOpt.setAttribute('tabindex', '0');
+            selectOptions.append(customOpt);
           });
-          sizeNode.addEventListener('change', () => {
-            selected.Size = sizeNode.value || null;
+
+          // Handle dropdown toggle
+          selectHeader.addEventListener('click', () => {
+            toggleDropdown();
+          });
+
+          // Handle keyboard navigation
+          selectHeader.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleDropdown();
+            }
+          });
+
+          function toggleDropdown() {
+            const isOpen = selectWrap.classList.contains('is-open');
+            if (isOpen) {
+              selectWrap.classList.remove('is-open');
+              selectHeader.setAttribute('aria-expanded', 'false');
+            } else {
+              selectWrap.classList.add('is-open');
+              selectHeader.setAttribute('aria-expanded', 'true');
+            }
+          }
+
+          // Handle option selection
+          selectOptions.addEventListener('click', (e) => {
+            const option = e.target.closest('.cpg-modal__select-option');
+            if (!option) return;
+            selectOption(option);
+          });
+
+          // Handle keyboard selection
+          selectOptions.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const option = e.target.closest('.cpg-modal__select-option');
+              if (option) {
+                selectOption(option);
+              }
+            }
+          });
+
+          function selectOption(option) {
+            const value = option.getAttribute('data-value');
+            selected.Size = value;
+
+            // Update display
+            placeholder.textContent = value;
+
+            // Update hidden select
+            sizeNode.value = value;
+
+            // Update selected state
+            selectOptions.querySelectorAll('.cpg-modal__select-option').forEach((opt) => {
+              opt.classList.remove('is-selected');
+              opt.setAttribute('aria-selected', 'false');
+            });
+            option.classList.add('is-selected');
+            option.setAttribute('aria-selected', 'true');
+
+            // Close dropdown
+            selectWrap.classList.remove('is-open');
+            selectHeader.setAttribute('aria-expanded', 'false');
+
             resolveVariant();
+          }
+
+          // Close dropdown when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!selectWrap.contains(e.target)) {
+              selectWrap.classList.remove('is-open');
+              selectHeader.setAttribute('aria-expanded', 'false');
+            }
           });
         }
 
