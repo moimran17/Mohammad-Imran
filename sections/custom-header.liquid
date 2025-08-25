@@ -7,7 +7,7 @@
   <div class="custom-header__container">
     <div class="custom-header__mobile">
       <div class="custom-header__mobile-top">
-        <button class="custom-header__hamburger">
+        <button class="custom-header__hamburger" data-hamburger-toggle>
           <span class="custom-header__hamburger-icon custom-header__hamburger-icon--open">
             {{- 'hamburger-open.svg' | inline_asset_content }}
           </span>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="custom-header__mobile-menu">
+      <div class="custom-header__mobile-menu" data-mobile-menu>
         <div class="custom-header__mobile-content">
           {% if section.settings.mobile_text != blank %}
             <p class="custom-header__mobile-text">{{ section.settings.mobile_text }}</p>
@@ -72,7 +72,30 @@
 
 {% javascript %}
   document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed.');
+    const hamburgerToggle = document.querySelector('[data-hamburger-toggle]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    const mobileTop = document.querySelector('.custom-header__mobile-top');
+    const hamburgerOpenIcon = document.querySelector('.custom-header__hamburger-icon--open');
+    const hamburgerCloseIcon = document.querySelector('.custom-header__hamburger-icon--close');
+
+    if (hamburgerToggle && mobileMenu) {
+      hamburgerToggle.addEventListener('click', function () {
+        const isOpen = mobileMenu.classList.contains('custom-header__mobile-menu--open');
+        if (isOpen) {
+          mobileMenu.classList.remove('custom-header__mobile-menu--open');
+          mobileTop.classList.remove('custom-header__mobile-top--menu-open');
+          hamburgerOpenIcon.style.display = 'block';
+          hamburgerCloseIcon.style.display = 'none';
+          hamburgerToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          mobileMenu.classList.add('custom-header__mobile-menu--open');
+          mobileTop.classList.add('custom-header__mobile-top--menu-open');
+          hamburgerOpenIcon.style.display = 'none';
+          hamburgerCloseIcon.style.display = 'block';
+          hamburgerToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
   });
 {% endjavascript %}
 

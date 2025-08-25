@@ -13,6 +13,11 @@
   align-items: center;
   min-height: 4rem;
   padding: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.custom-header__mobile-top--menu-open {
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .custom-header__hamburger {
@@ -39,6 +44,11 @@
 .custom-header__mobile-menu {
   max-height: 0;
   overflow: hidden;
+}
+
+.custom-header__mobile-menu--open {
+  min-height: 7rem;
+  max-height: 12rem;
 }
 
 .custom-header__mobile-content {
