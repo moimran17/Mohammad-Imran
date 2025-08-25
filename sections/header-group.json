@@ -10,6 +10,21 @@
 {
   "type": "header",
   "name": "Header",
-  "sections": {},
-  "order": []
+  "sections": {
+    "custom_header_JELCtc": {
+      "type": "custom-header",
+      "name": "Custom Header",
+      "settings": {
+        "color_scheme": "",
+        "logo_text": "TISSO VISON",
+        "mobile_text": "Find the ideal gift for your loved ones.",
+        "desktop_text": "Find the ideal gift for your loved ones.",
+        "button_label": "CHOOSE GIFT",
+        "button_link": "#"
+      }
+    }
+  },
+  "order": [
+    "custom_header_JELCtc"
+  ]
 }
