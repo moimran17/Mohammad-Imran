@@ -1,5 +1,4 @@
 {{ 'section-custom-product-grid.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'section-custom-product-grid.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   #cpg-{{ section.id }} {
@@ -7,9 +6,18 @@
     padding-top: {{ section.settings.padding_top_mobile }}px;
     margin: 0 auto;
   }
+
+  @media screen and (min-width: 1024px) {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+  }
 {%- endstyle -%}
 
-<section class="cpg" id="cpg-{{ section.id }}">
+<section
+  class="cpg"
+  id="cpg-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-upsell-handle="{%- if section.settings.upsell_product != blank -%}{{ section.settings.upsell_product.handle }}{%- endif -%}"
+>
   {%- if section.settings.title != blank -%}
     <h2 class="cpg__title">{{ section.settings.title }}</h2>
   {%- endif -%}
@@ -18,76 +26,275 @@
     {%- for block in section.blocks -%}
       {%- assign product = block.settings.product -%}
       {%- if product -%}
-        {%- assign img = product.featured_image -%}
-        <div class="cpg__card" {{ block.shopify_attributes }}>
-          <a href="#" class="cpg__card-link">
-            <div class="cpg__image-wrappper">
-              <img
-                class="cpg__image"
-                style="aspect-ratio: {{ img.aspect_ratio }};"
-                src="{{ img | image_url: width: img.width, height: img.height }}"
-                alt="{{ img.alt }}"
-                width="{{ img.width }}"
-                height="{{ img.height }}"
-              >
-            </div>
+        <article class="cpg__card" {{ block.shopify_attributes }}>
+          <a
+            href="#"
+            class="cpg__card-link"
+            data-product-handle="{{ product.handle }}"
+            aria-label="{{ product.title | escape }}"
+          >
+            {%- assign img = product.featured_image | default: product.images.first -%}
+            {%- if img -%}
+              <div class="cpg__image-wrapper" style="aspect-ratio: {{ img.aspect_ratio }};">
+                <img
+                  class="cpg__image"
+                  srcset="{{ img | image_url: width: 320 }} 320w, {{ img | image_url: width: 640 }} 640w, {{ img | image_url: width: 960 }} 960w"
+                  sizes="(min-width: 990px) 33vw, 50vw"
+                  src="{{ img | image_url: width: 640 }}"
+                  alt="{{ img.alt | escape }}"
+                  loading="lazy"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                >
+              </div>
+            {%- endif -%}
           </a>
-        </div>
+        </article>
       {%- endif -%}
     {%- endfor -%}
   </div>
 
-  <div class="cpg-modal">
-    <div
-      class="cpg-modal__dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="cpg-modal-title-{{ section.id }}"
-    >
-      <button class="cpg-modal__close">&times;</button>
+  <div class="cpg-modal" data-cpg-modal hidden>
+    <div class="cpg-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cpg-modal-title-{{ section.id }}">
+      <button type="button" class="cpg-modal__close" data-cpg-close aria-label="Close">&times;</button>
       <div class="cpg-modal__body">
-        <div class="cpg-modal__media-content-container">
-          <div class="cpg-modal__media"></div>
-          <div class="cpg-modal__content">
-            <h3 class="cpg-modal__title">Black Leather Bag</h3>
-            <div class="cpg-modal__price">30.00$</div>
-            <div class="cpg-modal__desc">
-              Thick black winter jacket, with soft fleece lining. Perfect for those cold weather days.
-            </div>
-          </div>
-        </div>
+        <div class="cpg-modal__media" data-cpg-media></div>
+        <div class="cpg-modal__content" data-cpg-content>
+          <h3 class="cpg-modal__title" id="cpg-modal-title-{{ section.id }}" data-cpg-title></h3>
+          <div class="cpg-modal__price" data-cpg-price></div>
+          <div class="cpg-modal__desc" data-cpg-desc></div>
 
-        <div class="cpg-modal__options-action-container">
-          <div class="cpg-modal__option">
-            <label for="" class="cpg-modal__label">Color</label>
-            <div class="cpg-modal__swatches"></div>
-          </div>
-          <div class="cpg-modal__option">
-            <label for="" class="cpg-modal__label">Size</label>
-            <div class="cpg-modal__select-wrap">
-              <select class="cpg-modal__select">
-                <option value="">Choose your size</option>
-              </select>
+          <div class="cpg-modal__options" data-cpg-options>
+            <div class="cpg-modal__option" data-cpg-color-wrap hidden>
+              <label class="cpg-modal__label">Color</label>
+              <div class="cpg-modal__swatches" data-cpg-color></div>
+            </div>
+
+            <div class="cpg-modal__option" data-cpg-size-wrap hidden>
+              <label class="cpg-modal__label">Size</label>
+              <div class="cpg-modal__select-wrap">
+                <select class="cpg-modal__select" data-cpg-size></select>
+              </div>
             </div>
           </div>
 
-          <div class="cpg-modal__action">
-            <button class="cpg-modal__atc">
-              <span class="gift-guide__atc-text">ADD TO CART</span>
-              <span class="gift-guide__atc-icon">
-                {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
-              </span>
-            </button>
-          </div>
+          <button class="cpg-modal__add" data-cpg-add disabled>
+            <span class="cpg-modal__add-text">ADD TO CART</span>
+            <span class="cpg-modal__add-icon">
+              {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
+            </span>
+          </button>
         </div>
       </div>
     </div>
-
-    <div class="cpg-modal__backdrop"></div>
+    <div class="cpg-modal__backdrop" data-cpg-backdrop></div>
   </div>
 </section>
 
 {% javascript %}
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.cpg');
+    if (!sections.length) return;
+
+    const moneyFormat = (amount, currency) => {
+      try {
+        return new Intl.NumberFormat(undefined, {
+          style: 'currency',
+          currency: currency || Shopify.currency.active,
+        }).format(amount / 100);
+      } catch (e) {
+        return (amount / 100).toFixed(2);
+      }
+    };
+
+    sections.forEach((section) => {
+      const modal = section.querySelector('[data-cpg-modal]');
+      const mediaWrap = modal.querySelector('[data-cpg-media]');
+      const titleNode = modal.querySelector('[data-cpg-title]');
+      const priceNode = modal.querySelector('[data-cpg-price]');
+      const descNode = modal.querySelector('[data-cpg-desc]');
+      const colorWrap = modal.querySelector('[data-cpg-color-wrap]');
+      const colorNode = modal.querySelector('[data-cpg-color]');
+      const sizeWrap = modal.querySelector('[data-cpg-size-wrap]');
+      const sizeNode = modal.querySelector('[data-cpg-size]');
+      const addBtn = modal.querySelector('[data-cpg-add]');
+      const backdrop = modal.querySelector('[data-cpg-backdrop]');
+      const closeBtn = modal.querySelector('[data-cpg-close]');
+
+      let productData = null;
+      let selected = { Color: null, Size: null };
+      let selectedVariant = null;
+
+      const openModal = () => {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+      const closeModal = () => {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        resetState();
+      };
+
+      const resetState = () => {
+        mediaWrap.innerHTML = '';
+        titleNode.textContent = '';
+        priceNode.textContent = '';
+        descNode.textContent = '';
+        colorNode.innerHTML = '';
+        sizeNode.innerHTML = '';
+        colorWrap.hidden = true;
+        sizeWrap.hidden = true;
+        selected = { Color: null, Size: null };
+        selectedVariant = null;
+        addBtn.disabled = true;
+      };
+
+      section.addEventListener('click', async (e) => {
+        const link = e.target.closest('.cpg__card-link');
+        if (!link) return;
+        e.preventDefault();
+        const handle = link.getAttribute('data-product-handle');
+        if (!handle) return;
+        await loadProduct(handle);
+        openModal();
+      });
+
+      backdrop.addEventListener('click', closeModal);
+      closeBtn.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => {
+        if (!modal.hidden && e.key === 'Escape') closeModal();
+      });
+
+      async function loadProduct(handle) {
+        resetState();
+        try {
+          const res = await fetch(`/products/${handle}.js`);
+          if (!res.ok) throw new Error('Failed to fetch product');
+          productData = await res.json();
+        } catch (err) {
+          console.error(err);
+          return;
+        }
+
+        const img = productData.images && productData.images[0];
+        if (img) {
+          const image = new Image();
+          image.src = img;
+          image.alt = productData.title;
+          mediaWrap.append(image);
+        }
+
+        titleNode.textContent = productData.title;
+        const currency = (Shopify && Shopify.currency && Shopify.currency.active) || 'USD';
+        priceNode.textContent = moneyFormat(productData.price, currency);
+        descNode.innerHTML = productData.description || '';
+
+        const options = productData.options || [];
+        const colorOption = options.find((o) => /color/i.test(o.name));
+        const sizeOption = options.find((o) => /size/i.test(o.name));
+
+        if (colorOption) {
+          colorWrap.hidden = false;
+          colorOption.values.forEach((value) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'cpg-swatch';
+            btn.setAttribute('data-color', value);
+
+            const dot = document.createElement('span');
+            dot.className = 'cpg-swatch__dot';
+            dot.style.background = value.toLowerCase();
+            btn.append(dot, document.createTextNode(value));
+
+            btn.addEventListener('click', () => {
+              selected.Color = value;
+              [...colorNode.children].forEach((n) => n.classList.remove('cpg-swatch--selected'));
+              btn.classList.add('cpg-swatch--selected');
+              resolveVariant();
+            });
+            colorNode.append(btn);
+          });
+        }
+
+        if (sizeOption) {
+          sizeWrap.hidden = false;
+          const placeholder = document.createElement('option');
+          placeholder.value = '';
+          placeholder.textContent = 'Choose your size';
+          sizeNode.append(placeholder);
+          sizeOption.values.forEach((value) => {
+            const opt = document.createElement('option');
+            opt.value = value;
+            opt.textContent = value;
+            sizeNode.append(opt);
+          });
+          sizeNode.addEventListener('change', () => {
+            selected.Size = sizeNode.value || null;
+            resolveVariant();
+          });
+        }
+
+        addBtn.addEventListener('click', onAddToCartOnce, { once: true });
+      }
+
+      function resolveVariant() {
+        const color = selected.Color;
+        const size = selected.Size;
+        if (!productData) return;
+        selectedVariant =
+          productData.variants.find((v) => {
+            const opt1 = productData.options[0] && productData.options[0].name;
+            const opt2 = productData.options[1] && productData.options[1].name;
+            const map = {};
+            if (opt1) map[opt1] = v.option1;
+            if (opt2) map[opt2] = v.option2;
+            const colorMatch = color ? Object.entries(map).some(([k, val]) => /color/i.test(k) && val === color) : true;
+            const sizeMatch = size ? Object.entries(map).some(([k, val]) => /size/i.test(k) && val === size) : true;
+            return colorMatch && sizeMatch;
+          }) || null;
+
+        addBtn.disabled = !(color && size && selectedVariant && selectedVariant.available);
+      }
+
+      async function onAddToCartOnce() {
+        if (!selectedVariant) return;
+        addBtn.disabled = true;
+        try {
+          await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: [{ id: selectedVariant.id, quantity: 1 }] }),
+          });
+
+          if ((selected.Color || '').toLowerCase() === 'black' && (selected.Size || '').toLowerCase() === 'm') {
+            const upsellHandle = section.getAttribute('data-upsell-handle');
+            if (upsellHandle) {
+              try {
+                const res = await fetch(`/products/${upsellHandle}.js`);
+                if (res.ok) {
+                  const upsell = await res.json();
+                  const firstAvailable = upsell.variants.find((v) => v.available) || upsell.variants[0];
+                  if (firstAvailable) {
+                    await fetch('/cart/add.js', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ items: [{ id: firstAvailable.id, quantity: 1 }] }),
+                    });
+                  }
+                }
+              } catch (e) {}
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        } finally {
+          addBtn.disabled = false;
+          closeModal();
+          window.location.assign('/cart');
+        }
+      }
+    });
+  });
 {% endjavascript %}
 
 {% schema %}
