@@ -83,14 +83,20 @@
   gap: 0.75rem;
 }
 .cpg-modal__title {
-  margin: 0;
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 300;
 }
 .cpg-modal__price {
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 .cpg-modal__desc {
-  color: #444;
-  font-size: 0.95rem;
+  color: #111;
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 .cpg-modal__label {

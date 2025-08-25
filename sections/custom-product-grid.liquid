@@ -103,12 +103,10 @@
 
     const moneyFormat = (amount, currency) => {
       try {
-        return new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: currency || Shopify.currency.active,
-        }).format(amount / 100);
+        const formattedAmount = (amount / 100).toFixed(2);
+        return `${formattedAmount}$`;
       } catch (e) {
-        return (amount / 100).toFixed(2);
+        return (amount / 100).toFixed(2) + '$';
       }
     };
 
