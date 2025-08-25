@@ -64,45 +64,71 @@
 .cpg-modal__body {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 2rem 1rem;
 }
 
-.cpg-modal__media {
-  flex: 0 0 auto;
-}
-.cpg-modal__media img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.cpg-modal__content {
+/* Row Layout */
+.cpg-modal__row {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
+
+.cpg-modal__row--product-info {
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.cpg-modal__row--color,
+.cpg-modal__row--size,
+.cpg-modal__row--add-to-cart {
+  flex-direction: column;
+}
+
+.cpg-modal__media {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
+.cpg-modal__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.cpg-modal__product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .cpg-modal__title {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 1.2rem;
   font-weight: 300;
 }
 .cpg-modal__price {
   font-size: 1.2rem;
   font-weight: 500;
+  margin: 0;
 }
 .cpg-modal__desc {
   color: #111;
   font-size: 1rem;
   font-weight: 100;
-  line-height: 1.1;
+  line-height: 1.4;
   letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .cpg-modal__label {
   display: block;
   font-size: 0.9rem;
-  margin-bottom: 0.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #111;
 }
 
 .cpg-modal__swatches {
@@ -186,26 +212,58 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.cpg-modal__add:hover:not([disabled]) {
+  background: #333;
 }
 .cpg-modal__add[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* Mobile Layout */
+@media screen and (max-width: 767px) {
+  .cpg-modal__dialog {
+    margin: 0.5rem;
+    max-height: calc(100% - 1rem);
+  }
+  
+  .cpg-modal__body {
+    padding: 1.5rem 1rem;
+    gap: 1.25rem;
+  }
+  
+  .cpg-modal__row--product-info {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .cpg-modal__media {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+  
+  .cpg-modal__product-info {
+    width: 100%;
+  }
+  
+  .cpg-modal__title {
+    font-size: 1.1rem;
+  }
+  
+  .cpg-modal__price {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop Layout */
 @media screen and (min-width: 768px) {
   .cpg-modal__dialog {
     margin: 3rem auto;
-    max-width: 860px;
-  }
-
-  .cpg-modal__body {
-    flex-direction: row;
-  }
-  .cpg-modal__media {
-    width: 45%;
-  }
-  .cpg-modal__content {
-    width: 55%;
+    max-width: 480px;
   }
 }
 

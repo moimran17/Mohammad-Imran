@@ -58,31 +58,37 @@
     <div class="cpg-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cpg-modal-title-{{ section.id }}">
       <button type="button" class="cpg-modal__close" data-cpg-close aria-label="Close">&times;</button>
       <div class="cpg-modal__body">
-        <div class="cpg-modal__media" data-cpg-media></div>
-        <div class="cpg-modal__content" data-cpg-content>
-          <h3 class="cpg-modal__title" id="cpg-modal-title-{{ section.id }}" data-cpg-title></h3>
-          <div class="cpg-modal__price" data-cpg-price></div>
-          <div class="cpg-modal__desc" data-cpg-desc></div>
+        <!-- Row 1: Media and Product Info -->
+        <div class="cpg-modal__row cpg-modal__row--product-info">
+          <div class="cpg-modal__media" data-cpg-media></div>
+          <div class="cpg-modal__product-info">
+            <h3 class="cpg-modal__title" id="cpg-modal-title-{{ section.id }}" data-cpg-title></h3>
+            <div class="cpg-modal__price" data-cpg-price></div>
+            <div class="cpg-modal__desc" data-cpg-desc></div>
+          </div>
+        </div>
 
-          <div class="cpg-modal__options" data-cpg-options>
-            <div class="cpg-modal__option" data-cpg-color-wrap hidden>
-              <label class="cpg-modal__label">Color</label>
-              <div class="cpg-modal__swatches" data-cpg-color></div>
-            </div>
+        <!-- Row 2: Color Selection -->
+        <div class="cpg-modal__row cpg-modal__row--color" data-cpg-color-wrap hidden>
+          <label class="cpg-modal__label">Color</label>
+          <div class="cpg-modal__swatches" data-cpg-color></div>
+        </div>
 
-            <div class="cpg-modal__option" data-cpg-size-wrap hidden>
-              <label class="cpg-modal__label">Size</label>
-              <div class="cpg-modal__select-wrap">
-                <select class="cpg-modal__select" data-cpg-size></select>
-                <div class="cpg-modal__select-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m6 8 4 4 4-4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
+        <!-- Row 3: Size Selection -->
+        <div class="cpg-modal__row cpg-modal__row--size" data-cpg-size-wrap hidden>
+          <label class="cpg-modal__label">Size</label>
+          <div class="cpg-modal__select-wrap">
+            <select class="cpg-modal__select" data-cpg-size></select>
+            <div class="cpg-modal__select-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6 8 4 4 4-4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
           </div>
+        </div>
 
+        <!-- Row 4: Add to Cart Button -->
+        <div class="cpg-modal__row cpg-modal__row--add-to-cart">
           <button class="cpg-modal__add" data-cpg-add disabled>
             <span class="cpg-modal__add-text">ADD TO CART</span>
             <span class="cpg-modal__add-icon">
