@@ -23,9 +23,66 @@
         "color_scheme": "scheme-1",
         "padding_top": 36
       }
+    },
+    "custom_product_grid_Dr66re": {
+      "type": "custom-product-grid",
+      "blocks": {
+        "product_Lt8QJR": {
+          "type": "product",
+          "settings": {
+            "product": "black-leather-bag"
+          }
+        },
+        "product_cHqPg4": {
+          "type": "product",
+          "settings": {
+            "product": "blue-silk-tuxedo"
+          }
+        },
+        "product_UbXeNq": {
+          "type": "product",
+          "settings": {
+            "product": "chequered-red-shirt"
+          }
+        },
+        "product_fc6tce": {
+          "type": "product",
+          "settings": {
+            "product": "classic-leather-jacket"
+          }
+        },
+        "product_DWG6QC": {
+          "type": "product",
+          "settings": {
+            "product": "classic-varsity-top"
+          }
+        },
+        "product_9PxAth": {
+          "type": "product",
+          "settings": {
+            "product": "dark-denim-top"
+          }
+        }
+      },
+      "block_order": [
+        "product_Lt8QJR",
+        "product_cHqPg4",
+        "product_UbXeNq",
+        "product_fc6tce",
+        "product_DWG6QC",
+        "product_9PxAth"
+      ],
+      "name": "Custom Product Grid",
+      "settings": {
+        "title": "Tisso vison in the wild",
+        "upsell_product": "dark-winter-jacket",
+        "padding_top_mobile": 36,
+        "padding_top_desktop": 0
+      }
     }
   },
   "order": [
-    "gift_guide_VWWpit"
+    "gift_guide_VWWpit",
+    "custom_product_grid_Dr66re"
   ]
 }
